@@ -1,0 +1,30 @@
+<div class="carousel-container" #carousel>
+  <div class="carousel-track"
+    (mousedown)="onDragStart($event.clientX)"
+    (mousemove)="onDragMove($event.clientX)"
+    (mouseup)="onDragEnd($event.clientX)"
+    (mouseleave)="onDragEnd($event.clientX)"
+    (touchstart)="onDragStart($event.touches[0].clientX)"
+    (touchmove)="onDragMove($event.touches[0].clientX)"
+    (touchend)="onDragEnd($event.changedTouches[0].clientX)">
+    
+    <div *ngFor="let slide of extendedSlides; let i = index" class="carousel-slide">
+      <div class="slide-card">
+        <img [src]="slide" alt="Slide {{ i + 1 }}" />
+
+        <!-- Tooltip message -->
+        <div class="tooltip">
+          {{ messages[i % slides.length] || 'Default hover message' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination dots -->
+  <div class="carousel-dots">
+    <span *ngFor="let dot of dots; let i = index"
+          [class.active]="i === currentDotIndex()"
+          (click)="goToSlide(i)">
+    </span>
+  </div>
+</div>

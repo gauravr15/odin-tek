@@ -1,0 +1,88 @@
+.fireworks-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Rocket streak */
+.firework {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 80px;
+  background: linear-gradient(to top, #ff4444, transparent);
+  animation: shoot 1.5s ease-out infinite;
+}
+
+.firework:nth-child(1) { left: 20%; }
+.firework:nth-child(2) { left: 50%; animation-delay: 0.5s; background: linear-gradient(to top, #44ddff, transparent); }
+.firework:nth-child(3) { left: 80%; animation-delay: 1s; background: linear-gradient(to top, #ffff44, transparent); }
+
+@keyframes shoot {
+  0%   { transform: translateY(0); opacity: 1; }
+  70%  { transform: translateY(-300px); opacity: 1; }
+  100% { transform: translateY(-350px); opacity: 0; }
+}
+
+/* Circular burst glow at top */
+.firework::after {
+  content: '';
+  position: absolute;
+  top: -320px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, white, transparent);
+  opacity: 0;
+  animation: burstGlow 1.5s ease-out infinite;
+}
+
+.firework:nth-child(2)::after { background: radial-gradient(circle, cyan, transparent); }
+.firework:nth-child(3)::after { background: radial-gradient(circle, yellow, transparent); }
+
+@keyframes burstGlow {
+  0%,60% { opacity: 0; transform: scale(0.5); }
+  70%    { opacity: 1; transform: scale(1); }
+  100%   { opacity: 0; transform: scale(2); }
+}
+
+/* ✨ Sparkle rays flying out */
+.firework::before {
+  content: '';
+  position: absolute;
+  top: -320px;
+  left: -2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 
+    0 -20px currentColor,
+    20px 0 currentColor,
+    -20px 0 currentColor,
+    0 20px currentColor,
+    14px 14px currentColor,
+    -14px 14px currentColor,
+    14px -14px currentColor,
+    -14px -14px currentColor;
+  opacity: 0;
+  animation: sparkles 1.5s ease-out infinite;
+  color: inherit;
+}
+
+.firework:nth-child(1)::before { color: #ff4444; }
+.firework:nth-child(2)::before { color: #44ddff; animation-delay: 0.5s; }
+.firework:nth-child(3)::before { color: #ffff44; animation-delay: 1s; }
+
+@keyframes sparkles {
+  0%,60% { opacity: 0; transform: scale(0.5); }
+  70%    { opacity: 1; transform: scale(1.2); }
+  100%   { opacity: 0; transform: scale(2.5); }
+}

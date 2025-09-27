@@ -1,0 +1,87 @@
+.site-banner {
+  position: relative;
+  width: 100%;
+  min-height: var(--banner-min-height);
+  height: var(--banner-height);
+  overflow: hidden;
+
+  /* Video background */
+  .banner__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0;
+    animation: fadeInVideo 1.5s forwards;
+
+    /* Apply fade at bottom so it blends with body/main */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%);
+    mask-repeat: no-repeat;
+    mask-size: cover;
+  }
+
+  @keyframes fadeInVideo {
+    to { opacity: 1; }
+  }
+
+  /* Remove hard ::after overlay and just let mask do blending */
+  &::after {
+    display: none;
+  }
+
+  /* Content overlay */
+  .banner__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .banner__content {
+    color: #fff;
+    text-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  }
+
+  .banner__title {
+    margin: 0 0 0.5rem 0;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .banner__subtitle {
+    margin: 0;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    opacity: 0.9;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .site-banner {
+    height: 40vh;
+    .banner__inner { padding: 1.5rem 1rem; }
+    .banner__title { font-size: 2rem; }
+    .banner__subtitle { font-size: 1rem; }
+  }
+}
+
+@media (max-width: 480px) {
+  .site-banner {
+    min-height: 250px;
+    height: 30vh;
+    .banner__inner { padding: 1rem 0.75rem; }
+    .banner__title { font-size: 1.6rem; }
+    .banner__subtitle { font-size: 0.9rem; }
+  }
+}
