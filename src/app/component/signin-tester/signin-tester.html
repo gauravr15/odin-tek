@@ -1,0 +1,15 @@
+<div class="signin-tester">
+  <button (click)="testSignIn()" [disabled]="isLoading">
+    {{ isLoading ? 'Testing...' : 'Test Sign-In Call' }}
+  </button>
+
+  <div class="result" *ngIf="response">
+    <h4>✅ Response:</h4>
+    <pre>{{ response | json }}</pre>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <h4>❌ Error:</h4>
+    <pre>{{ error }}</pre>
+  </div>
+</div>
